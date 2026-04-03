@@ -1,0 +1,130 @@
+{
+	"info": {
+		"name": "Medusa Email Verification",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:9000"
+		},
+		{
+			"key": "publishable_api_key",
+			"value": ""
+		},
+		{
+			"key": "token",
+			"value": ""
+		}
+	],
+	"item": [
+		{
+			"name": "Store",
+			"item": [
+				{
+					"name": "Verify email token",
+					"request": {
+						"method": "POST",
+						"url": {
+							"raw": "{{base_url}}/store/email/verify",
+							"host": ["{{base_url}}"],
+							"path": ["store", "email", "verify"]
+						},
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "x-publishable-api-key",
+								"value": "{{publishable_api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"token\": \"<verification_token>\"\n}"
+						}
+					}
+				},
+				{
+					"name": "Send verification email",
+					"request": {
+						"method": "POST",
+						"url": {
+							"raw": "{{base_url}}/store/email/verify/send",
+							"host": ["{{base_url}}"],
+							"path": ["store", "email", "verify", "send"]
+						},
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "x-publishable-api-key",
+								"value": "{{publishable_api_key}}"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"callback_url\": \"http://localhost:3000/email/verify\"\n}"
+						}
+					}
+				},
+				{
+					"name": "Get verification status",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/store/email/verify/status",
+							"host": ["{{base_url}}"],
+							"path": ["store", "email", "verify", "status"]
+						},
+						"header": [
+							{
+								"key": "x-publishable-api-key",
+								"value": "{{publishable_api_key}}"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Get customer verification status",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "{{base_url}}/admin/customers/:id/email/verification",
+							"host": ["{{base_url}}"],
+							"path": ["admin", "customers", ":id", "email", "verification"],
+							"variable": [
+								{
+									"key": "id",
+									"value": "<customer_id>"
+								}
+							]
+						},
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						]
+					}
+				}
+			]
+		}
+	]
+}
