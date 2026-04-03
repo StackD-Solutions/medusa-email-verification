@@ -1,7 +1,7 @@
 <!--suppress HtmlDeprecatedAttribute -->
 <h1 align="center">
   <br>
-  <a href="https://www.stackd-solutions.io"><img src="docs/logo.svg" alt="StackD Solutions" width="250"></a>
+  <a href="https://www.stackd-solutions.io"><img src="https://raw.githubusercontent.com/StackD-Solutions/medusa-email-verification/main/docs/logo.svg" alt="StackD Solutions" width="250"></a>
   <br>Medusa Email Verification Plugin
   <br>
 </h1>
