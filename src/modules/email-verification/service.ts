@@ -11,7 +11,7 @@ const PluginOptionsSchema = z.object({
 export type EmailVerificationPluginOptions = z.infer<typeof PluginOptionsSchema>
 
 class EmailVerificationModuleService extends MedusaService({EmailVerification}) {
-	private pluginOptions_: EmailVerificationPluginOptions
+	private readonly pluginOptions_: EmailVerificationPluginOptions
 
 	constructor(container: Record<string, unknown>, options: Record<string, unknown>) {
 		super(container, options)
@@ -22,8 +22,12 @@ class EmailVerificationModuleService extends MedusaService({EmailVerification}) 
 		return PluginOptionsSchema.parse(options)
 	}
 
-	get pluginOptions(): EmailVerificationPluginOptions {
-		return this.pluginOptions_
+	get autoSendOnRegister(): boolean {
+		return this.pluginOptions_.autoSendOnRegister
+	}
+
+	get callbackUrl(): string | undefined {
+		return this.pluginOptions_.callbackUrl
 	}
 
 	async generateToken(customerId: string): Promise<{token: string}> {

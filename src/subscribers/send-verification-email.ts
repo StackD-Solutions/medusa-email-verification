@@ -11,14 +11,14 @@ type CustomerCreatedData = {
 export default async function sendVerificationEmailHandler({event: {data}, container}: SubscriberArgs<CustomerCreatedData>) {
 	const emailVerificationService = container.resolve<EmailVerificationModuleService>(EMAIL_VERIFICATION_MODULE)
 
-	if (!emailVerificationService.pluginOptions.autoSendOnRegister) {
+	if (!emailVerificationService.autoSendOnRegister) {
 		return
 	}
 
 	const customerModule = container.resolve(Modules.CUSTOMER)
 	const customer = await customerModule.retrieveCustomer(data.id)
 
-	const callbackUrl = emailVerificationService.pluginOptions.callbackUrl || process.env.STORE_CORS?.split(',')[0] + '/email/verify'
+	const callbackUrl = emailVerificationService.callbackUrl || process.env.STORE_CORS?.split(',')[0] + '/email/verify'
 
 	await sendVerificationEmailWorkflow(container).run({
 		input: {
