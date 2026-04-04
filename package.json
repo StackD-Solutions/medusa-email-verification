@@ -38,7 +38,9 @@
 		"build:types": "tsc --project tsconfig.types.json",
 		"dev": "medusa plugin:develop",
 		"lint": "eslint src --ext .ts",
-		"fix:prettier": "prettier --write ."
+		"fix:prettier": "prettier --write .",
+		"test": "jest",
+		"test:coverage": "jest --coverage"
 	},
 	"peerDependencies": {
 		"@medusajs/framework": "^2.13.5",
@@ -55,10 +57,13 @@
 		"@medusajs/medusa": "2.13.5",
 		"@medusajs/ui": "^4.0.0",
 		"@swc/core": "^1.15.21",
+		"@swc/jest": "^0.2.39",
+		"@types/jest": "^30.0.0",
 		"@types/node": "^20.12.11",
 		"@types/react": "^18.3.2",
 		"@types/react-dom": "^18.2.25",
 		"eslint": "^10.1.0",
+		"jest": "^30.3.0",
 		"prettier": "^3",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
