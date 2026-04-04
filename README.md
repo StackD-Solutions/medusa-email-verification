@@ -71,6 +71,12 @@ export default defineConfig({
 })
 ```
 
+After adding the plugin, run migrations:
+
+```bash
+npx medusa db:migrate
+```
+
 ### Plugin Options
 
 | Option               | Type      | Default | Description                                                              |
