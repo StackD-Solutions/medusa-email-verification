@@ -80,10 +80,10 @@ npx medusa db:migrate
 ### Plugin Options
 
 | Option               | Type      | Default | Description                                                              |
-| -------------------- | --------- | ------- | ------------------------------------------------------------------------ |
+| -------------------- | --------- |---------| ------------------------------------------------------------------------ |
 | `tokenExpiryHours`   | `number`  | `24`    | How long a verification token remains valid (in hours)                   |
 | `autoSendOnRegister` | `boolean` | `true`  | Whether to automatically send a verification email on customer creation  |
-| `callbackUrl`        | `string`  | —       | Override the default callback URL (falls back to `STORE_CORS`-based URL) |
+| `callbackUrl`        | `string`  | ➖      | Override the default callback URL (falls back to `STORE_CORS`-based URL) |
 
 After adding the plugin, run migrations:
 
@@ -175,8 +175,8 @@ import type {
 | `VerifyTokenResponse`             | `{ success: boolean, message?: string }`        |
 | `SendVerificationResponse`        | `{ message: string }`                           |
 | `EmailVerificationStatusResponse` | `{ verified: boolean }`                         |
-| `SendVerificationEmailInput`      | Input for the verification workflow              |
-| `EmailVerificationPluginOptions`  | Plugin options (validated with Zod at startup)   |
+| `SendVerificationEmailInput`      | Input for the verification workflow             |
+| `EmailVerificationPluginOptions`  | Plugin options (validated with Zod at startup)  |
 
 The module key is also exported:
 
