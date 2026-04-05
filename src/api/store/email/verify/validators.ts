@@ -1,13 +1,5 @@
-import {z} from 'zod'
+export {VerifyEmailTokenRequest as VerifyTokenRequestSchema} from '../../../../generated/schemas'
+export type {VerifyEmailTokenRequest as VerifyTokenBody} from '../../../../generated/schemas'
 
-export const VerifyTokenRequestSchema = z.object({
-	token: z.string()
-})
-
-export type VerifyTokenBody = z.infer<typeof VerifyTokenRequestSchema>
-
-export const SendVerificationRequestSchema = z.object({
-	callback_url: z.string()
-})
-
-export type SendVerificationBody = z.infer<typeof SendVerificationRequestSchema>
+export {SendVerificationEmailRequest as SendVerificationRequestSchema} from '../../../../generated/schemas'
+export type {SendVerificationEmailRequest as SendVerificationBody} from '../../../../generated/schemas'

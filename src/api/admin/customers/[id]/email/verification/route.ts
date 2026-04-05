@@ -2,7 +2,7 @@ import type {AuthenticatedMedusaRequest, MedusaResponse} from '@medusajs/framewo
 import {EMAIL_VERIFICATION_MODULE} from '../../../../../../modules/email-verification'
 import type EmailVerificationModuleService from '../../../../../../modules/email-verification/service'
 
-export async function GET(req: AuthenticatedMedusaRequest, res: MedusaResponse) {
+export async function GET(req: AuthenticatedMedusaRequest, res: MedusaResponse): Promise<MedusaResponse> {
 	const {id} = req.params
 	const emailVerificationService: EmailVerificationModuleService = req.scope.resolve(EMAIL_VERIFICATION_MODULE)
 

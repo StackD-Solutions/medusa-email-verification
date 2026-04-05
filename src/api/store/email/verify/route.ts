@@ -3,7 +3,7 @@ import {EMAIL_VERIFICATION_MODULE} from '../../../../modules/email-verification'
 import type EmailVerificationModuleService from '../../../../modules/email-verification/service'
 import type {VerifyTokenBody} from './validators'
 
-export async function POST(req: MedusaRequest<VerifyTokenBody>, res: MedusaResponse) {
+export async function POST(req: MedusaRequest<VerifyTokenBody>, res: MedusaResponse): Promise<MedusaResponse> {
 	const {token} = req.body
 
 	if (!token) {

@@ -3,7 +3,7 @@ import {EMAIL_VERIFICATION_MODULE} from '../../../../../modules/email-verificati
 import type EmailVerificationModuleService from '../../../../../modules/email-verification/service'
 import {requireCustomerId} from '../../../../../utils/utils'
 
-export async function GET(req: MedusaRequest, res: MedusaResponse) {
+export async function GET(req: MedusaRequest, res: MedusaResponse): Promise<MedusaResponse> {
 	const customerId = requireCustomerId(req)
 	const emailVerificationService: EmailVerificationModuleService = req.scope.resolve(EMAIL_VERIFICATION_MODULE)
 

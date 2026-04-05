@@ -1,3 +1,10 @@
-export type {VerifyTokenBody, SendVerificationBody} from '../api/store/email/verify/validators'
-export type {VerifyTokenResponse, SendVerificationResponse, EmailVerificationStatusResponse} from '../api/store/email/verify/types'
+export type {
+	SendVerificationEmailRequest,
+	SendVerificationEmailResponse,
+	VerifyEmailTokenRequest,
+	VerifyEmailTokenResponse,
+	EmailVerificationStatusResponse,
+} from '../generated/schemas'
+
 export type {SendVerificationEmailInput} from '../workflows/types'
+export type {EmailVerificationPluginOptions} from '../modules/email-verification/service'
