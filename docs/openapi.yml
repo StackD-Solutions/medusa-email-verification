@@ -1,0 +1,172 @@
+openapi: 3.2.0
+info:
+ title: Medusa Email Verification API
+ description: API for email verification in Medusa stores
+ version: 0.1.0
+servers:
+ - url: http://localhost:9000
+   description: Local Medusa server
+paths:
+ /store/email/verify/send:
+  post:
+   summary: Send verification email
+   description: Sends a verification email to the currently authenticated customer
+   operationId: sendVerificationEmail
+   tags:
+    - Email Verification
+   requestBody:
+    required: true
+    content:
+     application/json:
+      schema:
+       $ref: '#/components/schemas/SendVerificationEmailRequest'
+   responses:
+    '200':
+     description: Verification email sent successfully
+     content:
+      application/json:
+       schema:
+        $ref: '#/components/schemas/SendVerificationEmailResponse'
+    '400':
+     description: Invalid request body
+     content:
+      application/json:
+       schema:
+        $ref: '#/components/schemas/Error'
+    '401':
+     description: Unauthorized — customer is not authenticated
+     content:
+      application/json:
+       schema:
+        $ref: '#/components/schemas/Error'
+    '500':
+     description: Internal server error
+     content:
+      application/json:
+       schema:
+        $ref: '#/components/schemas/Error'
+ /store/email/verify:
+  post:
+   summary: Verify email token
+   description: Verifies the email using the token received via email
+   operationId: verifyEmailToken
+   tags:
+    - Email Verification
+   requestBody:
+    required: true
+    content:
+     application/json:
+      schema:
+       $ref: '#/components/schemas/VerifyEmailTokenRequest'
+   responses:
+    '200':
+     description: Email verified successfully
+     content:
+      application/json:
+       schema:
+        $ref: '#/components/schemas/VerifyEmailTokenResponse'
+    '400':
+     description: Invalid or expired token
+     content:
+      application/json:
+       schema:
+        $ref: '#/components/schemas/Error'
+    '401':
+     description: Unauthorized — customer is not authenticated
+     content:
+      application/json:
+       schema:
+        $ref: '#/components/schemas/Error'
+    '500':
+     description: Internal server error
+     content:
+      application/json:
+       schema:
+        $ref: '#/components/schemas/Error'
+ /store/email/verify/status:
+  get:
+   summary: Get email verification status
+   description: Returns the email verification status for the currently authenticated customer
+   operationId: getEmailVerificationStatus
+   tags:
+    - Email Verification
+   responses:
+    '200':
+     description: Verification status retrieved successfully
+     content:
+      application/json:
+       schema:
+        $ref: '#/components/schemas/EmailVerificationStatusResponse'
+    '401':
+     description: Unauthorized — customer is not authenticated
+     content:
+      application/json:
+       schema:
+        $ref: '#/components/schemas/Error'
+    '500':
+     description: Internal server error
+     content:
+      application/json:
+       schema:
+        $ref: '#/components/schemas/Error'
+components:
+ schemas:
+  SendVerificationEmailRequest:
+   type: object
+   required:
+    - callback_url
+   properties:
+    callback_url:
+     type: string
+     description: The URL to redirect the customer to after clicking the verification link
+
+  SendVerificationEmailResponse:
+   type: object
+   required:
+    - message
+   properties:
+    message:
+     type: string
+     description: Confirmation message
+
+  VerifyEmailTokenRequest:
+   type: object
+   required:
+    - token
+   properties:
+    token:
+     type: string
+     description: The verification token received via email
+
+  VerifyEmailTokenResponse:
+   type: object
+   required:
+    - success
+   properties:
+    success:
+     type: boolean
+     description: Whether the verification was successful
+    message:
+     type: string
+     description: Optional message with additional details
+
+  EmailVerificationStatusResponse:
+   type: object
+   required:
+    - verified
+   properties:
+    verified:
+     type: boolean
+     description: Whether the customer's email is verified
+
+  Error:
+   type: object
+   required:
+    - message
+   properties:
+    message:
+     type: string
+     description: Error message
+    code:
+     type: string
+     description: Error code
