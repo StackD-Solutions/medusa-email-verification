@@ -158,10 +158,10 @@ The plugin exports the following types:
 
 ```typescript
 import type {
-	VerifyTokenBody,
-	SendVerificationBody,
-	VerifyTokenResponse,
-	SendVerificationResponse,
+	SendVerificationEmailRequest,
+	SendVerificationEmailResponse,
+	VerifyEmailTokenRequest,
+	VerifyEmailTokenResponse,
 	EmailVerificationStatusResponse,
 	SendVerificationEmailInput,
 	EmailVerificationPluginOptions
@@ -170,10 +170,10 @@ import type {
 
 | Type                              | Description                                     |
 | --------------------------------- | ----------------------------------------------- |
-| `VerifyTokenBody`                 | `{ token: string }`                             |
-| `SendVerificationBody`            | `{ callback_url: string }`                      |
-| `VerifyTokenResponse`             | `{ success: boolean, message?: string }`        |
-| `SendVerificationResponse`        | `{ message: string }`                           |
+| `SendVerificationEmailRequest`    | `{ callback_url: string }`                      |
+| `SendVerificationEmailResponse`   | `{ message: string }`                           |
+| `VerifyEmailTokenRequest`         | `{ token: string }`                             |
+| `VerifyEmailTokenResponse`        | `{ success: boolean, message?: string }`        |
 | `EmailVerificationStatusResponse` | `{ verified: boolean }`                         |
 | `SendVerificationEmailInput`      | Input for the verification workflow             |
 | `EmailVerificationPluginOptions`  | Plugin options (validated with Zod at startup)  |
