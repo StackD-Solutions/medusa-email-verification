@@ -3,9 +3,9 @@ import {Modules} from '@medusajs/framework/utils'
 import {EMAIL_VERIFICATION_MODULE} from '../../../../../modules/email-verification'
 import type EmailVerificationModuleService from '../../../../../modules/email-verification/service'
 import {requireCustomerId} from '../../../../../utils/utils'
-import type {SendVerificationBody} from '../validators'
+import type {SendVerificationEmailRequest} from '../validators'
 
-export const POST = async (req: MedusaRequest<SendVerificationBody>, res: MedusaResponse): Promise<MedusaResponse> => {
+export const POST = async (req: MedusaRequest<SendVerificationEmailRequest>, res: MedusaResponse): Promise<MedusaResponse> => {
 	const {callback_url} = req.body
 
 	const customerId = requireCustomerId(req)

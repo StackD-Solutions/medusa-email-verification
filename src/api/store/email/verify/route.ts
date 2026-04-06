@@ -1,9 +1,9 @@
 import type {MedusaRequest, MedusaResponse} from '@medusajs/framework/http'
 import {EMAIL_VERIFICATION_MODULE} from '../../../../modules/email-verification'
 import type EmailVerificationModuleService from '../../../../modules/email-verification/service'
-import type {VerifyTokenBody} from './validators'
+import type {VerifyEmailTokenRequest} from './validators'
 
-export const POST = async (req: MedusaRequest<VerifyTokenBody>, res: MedusaResponse): Promise<MedusaResponse> => {
+export const POST = async (req: MedusaRequest<VerifyEmailTokenRequest>, res: MedusaResponse): Promise<MedusaResponse> => {
 	const {token} = req.body
 
 	const emailVerificationService: EmailVerificationModuleService = req.scope.resolve(EMAIL_VERIFICATION_MODULE)
