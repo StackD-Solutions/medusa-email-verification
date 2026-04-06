@@ -5,12 +5,8 @@ import type EmailVerificationModuleService from '../../../../../modules/email-ve
 import {requireCustomerId} from '../../../../../utils/utils'
 import type {SendVerificationBody} from '../validators'
 
-export async function POST(req: MedusaRequest<SendVerificationBody>, res: MedusaResponse): Promise<MedusaResponse> {
+export const POST = async (req: MedusaRequest<SendVerificationBody>, res: MedusaResponse): Promise<MedusaResponse> => {
 	const {callback_url} = req.body
-
-	if (!callback_url) {
-		return res.status(400).json({message: 'callback_url is required'})
-	}
 
 	const customerId = requireCustomerId(req)
 	const emailVerificationService: EmailVerificationModuleService = req.scope.resolve(EMAIL_VERIFICATION_MODULE)

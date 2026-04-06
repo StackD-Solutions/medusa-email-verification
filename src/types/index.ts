@@ -3,7 +3,7 @@ export type {
 	SendVerificationEmailResponse,
 	VerifyEmailTokenRequest,
 	VerifyEmailTokenResponse,
-	EmailVerificationStatusResponse,
+	EmailVerificationStatusResponse
 } from '../generated/schemas'
 
 export type {SendVerificationEmailInput} from '../workflows/types'

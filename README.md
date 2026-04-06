@@ -83,7 +83,7 @@ npx medusa db:migrate
 | -------------------- | --------- |---------| ------------------------------------------------------------------------ |
 | `tokenExpiryHours`   | `number`  | `24`    | How long a verification token remains valid (in hours)                   |
 | `autoSendOnRegister` | `boolean` | `true`  | Whether to automatically send a verification email on customer creation  |
-| `callbackUrl`        | `string`  | ➖      | Override the default callback URL (falls back to `STORE_CORS`-based URL) |
+| `callbackUrl`        | `string`  | -       | Override the default callback URL (falls back to `STORE_CORS`-based URL) |
 
 After adding the plugin, run migrations:
 
@@ -93,20 +93,20 @@ npx medusa db:migrate
 
 ### Environment Variables
 
-The subscriber uses `STORE_CORS` to build the default callback URL for verification emails sent on customer registration:
+The subscriber uses `STOREFRONT_URL` to build the default callback URL for verification emails sent on customer registration:
 
 ```
-STORE_CORS=http://localhost:8000
+STOREFRONT_URL=http://localhost:8000
 ```
 
-The default callback URL is constructed as `{first STORE_CORS origin}/email/verify`. You can override this globally via the `callbackUrl` plugin option, or per-request by using the send endpoint directly with a custom `callback_url`.
+If `STOREFRONT_URL` is not set, it falls back to the first origin in `STORE_CORS`. You can also override the URL globally via the `callbackUrl` plugin option, or per-request by using the send endpoint directly with a custom `callback_url`.
 
 ## API Endpoints
 
 | Method | Endpoint                                  | Scope | Auth | Description                                   |
-| ------ | ----------------------------------------- | ----- | ---- | --------------------------------------------- |
+| ------ | ----------------------------------------- | ----- |------| --------------------------------------------- |
 | POST   | `/store/email/verify/send`                | Store | ✅   | Send a verification email to the customer     |
-| POST   | `/store/email/verify`                     | Store | ➖   | Verify an email token (public)                |
+| POST   | `/store/email/verify`                     | Store | -    | Verify an email token (public)                |
 | GET    | `/store/email/verify/status`              | Store | ✅   | Check verification status of current customer |
 | GET    | `/admin/customers/:id/email/verification` | Admin | ✅   | Get verification status for a customer        |
 
@@ -168,15 +168,15 @@ import type {
 } from '@stackd-solutions/medusa-email-verification'
 ```
 
-| Type                              | Description                                     |
-| --------------------------------- | ----------------------------------------------- |
-| `SendVerificationEmailRequest`    | `{ callback_url: string }`                      |
-| `SendVerificationEmailResponse`   | `{ message: string }`                           |
-| `VerifyEmailTokenRequest`         | `{ token: string }`                             |
-| `VerifyEmailTokenResponse`        | `{ success: boolean, message?: string }`        |
-| `EmailVerificationStatusResponse` | `{ verified: boolean }`                         |
-| `SendVerificationEmailInput`      | Input for the verification workflow             |
-| `EmailVerificationPluginOptions`  | Plugin options (validated with Zod at startup)  |
+| Type                              | Description                                    |
+| --------------------------------- | ---------------------------------------------- |
+| `SendVerificationEmailRequest`    | `{ callback_url: string }`                     |
+| `SendVerificationEmailResponse`   | `{ message: string }`                          |
+| `VerifyEmailTokenRequest`         | `{ token: string }`                            |
+| `VerifyEmailTokenResponse`        | `{ success: boolean, message?: string }`       |
+| `EmailVerificationStatusResponse` | `{ verified: boolean }`                        |
+| `SendVerificationEmailInput`      | Input for the verification workflow            |
+| `EmailVerificationPluginOptions`  | Plugin options (validated with Zod at startup) |
 
 The module key is also exported:
 

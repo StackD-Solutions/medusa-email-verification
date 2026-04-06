@@ -8,7 +8,7 @@ type CustomerCreatedData = {
 	id: string
 }
 
-export default async function sendVerificationEmailHandler({event: {data}, container}: SubscriberArgs<CustomerCreatedData>) {
+export const sendVerificationEmailHandler = async ({event: {data}, container}: SubscriberArgs<CustomerCreatedData>): Promise<void> => {
 	const emailVerificationService = container.resolve<EmailVerificationModuleService>(EMAIL_VERIFICATION_MODULE)
 
 	if (!emailVerificationService.autoSendOnRegister) {
@@ -18,7 +18,7 @@ export default async function sendVerificationEmailHandler({event: {data}, conta
 	const customerModule = container.resolve(Modules.CUSTOMER)
 	const customer = await customerModule.retrieveCustomer(data.id)
 
-	const callbackUrl = emailVerificationService.callbackUrl || process.env.STORE_CORS?.split(',')[0] + '/email/verify'
+	const callbackUrl = emailVerificationService.callbackUrl || (process.env.STOREFRONT_URL || process.env.STORE_CORS?.split(',')[0]) + '/email/verify'
 
 	await sendVerificationEmailWorkflow(container).run({
 		input: {
@@ -33,3 +33,5 @@ export default async function sendVerificationEmailHandler({event: {data}, conta
 export const config: SubscriberConfig = {
 	event: 'customer.created'
 }
+
+export default sendVerificationEmailHandler
