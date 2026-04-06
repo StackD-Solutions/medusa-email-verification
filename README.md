@@ -80,7 +80,7 @@ npx medusa db:migrate
 ### Plugin Options
 
 | Option               | Type      | Default | Description                                                              |
-| -------------------- | --------- |---------| ------------------------------------------------------------------------ |
+| -------------------- | --------- | ------- | ------------------------------------------------------------------------ |
 | `tokenExpiryHours`   | `number`  | `24`    | How long a verification token remains valid (in hours)                   |
 | `autoSendOnRegister` | `boolean` | `true`  | Whether to automatically send a verification email on customer creation  |
 | `callbackUrl`        | `string`  | -       | Override the default callback URL (falls back to `STORE_CORS`-based URL) |
@@ -104,7 +104,7 @@ If `STOREFRONT_URL` is not set, it falls back to the first origin in `STORE_CORS
 ## API Endpoints
 
 | Method | Endpoint                                  | Scope | Auth | Description                                   |
-| ------ | ----------------------------------------- | ----- |------| --------------------------------------------- |
+| ------ | ----------------------------------------- | ----- | ---- | --------------------------------------------- |
 | POST   | `/store/email/verify/send`                | Store | ✅   | Send a verification email to the customer     |
 | POST   | `/store/email/verify`                     | Store | -    | Verify an email token (public)                |
 | GET    | `/store/email/verify/status`              | Store | ✅   | Check verification status of current customer |
