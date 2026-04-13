@@ -3,11 +3,12 @@ import type {Config} from 'jest'
 const config: Config = {
 	testEnvironment: 'node',
 	roots: ['<rootDir>/__tests__'],
+	testMatch: ['**/*.test.ts'],
 	moduleFileExtensions: ['ts', 'tsx', 'js'],
 	transform: {
 		'^.+\\.tsx?$': '@swc/jest'
 	},
-	collectCoverageFrom: ['src/utils/**/*.ts', 'src/api/**/validators.ts'],
+	collectCoverageFrom: ['src/utils/**/*.ts', 'src/api/**/validators.ts', 'src/api/**/route.ts'],
 	coverageThreshold: {
 		global: {
 			branches: 100,
